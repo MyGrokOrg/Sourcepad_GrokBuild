@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --color-bg: #121418;
+  --color-surface: #1a1e24;
+  --color-elevated: #242a32;
+  --color-editor: #16191e;
+  --color-fg: #d7dce4;
+  --color-muted: #8b93a1;
+  --color-faint: #7d8794;
+  --color-border: #2e353f;
+  --color-primary: #3cba8b;
+  --color-primary-fg: #06281c;
+  --color-warn: #e0a35a;
+  --color-danger: #e07a7a;
+  --color-overlay: rgb(0 0 0 / 0.55);
+}
+
+:root {
+  color-scheme: dark;
+  --syn-keyword: #7dcea0;
+  --syn-string: #e2b56a;
+  --syn-number: #e0946a;
+  --syn-comment: #7f8b9c;
+  --syn-fn: #8eb4d4;
+  --syn-type: #c5d4a4;
+  --syn-prop: #d6c48a;
+  --syn-fg: #d7dce4;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --color-bg: #e4e7ec;
+  --color-surface: #f3f5f7;
+  --color-elevated: #ffffff;
+  --color-editor: #fbfcfd;
+  --color-fg: #1c2128;
+  --color-muted: #5c6570;
+  --color-faint: #6d7682;
+  --color-border: #d5dae1;
+  --color-primary: #0f7a56;
+  --color-primary-fg: #f4fffb;
+  --color-warn: #8a5a10;
+  --color-danger: #b42318;
+  --color-overlay: rgb(20 24 28 / 0.45);
+  --syn-keyword: #0b6b48;
+  --syn-string: #8a4e0c;
+  --syn-number: #b4532a;
+  --syn-comment: #68717c;
+  --syn-fn: #1d5f99;
+  --syn-type: #3f6212;
+  --syn-prop: #8a6412;
+  --syn-fg: #1c2128;
+}
+
+@layer base {
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.cm-editor {
+  height: 100%;
+  background: var(--color-editor);
+}
+
+.cm-editor.cm-focused {
+  outline: none;
+}
+
+.cm-scroller {
+  overflow: auto;
+  font-family: var(--font-mono);
+  line-height: 1.55;
+  overscroll-behavior: contain;
+}
+
+.cm-editor .cm-searchMatch {
+  background-color: color-mix(in srgb, var(--color-primary) 32%, transparent) !important;
+}
+
+.cm-editor .cm-searchMatch.cm-searchMatch-selected {
+  background-color: color-mix(in srgb, var(--color-warn) 55%, transparent) !important;
+  outline: 1px solid color-mix(in srgb, var(--color-warn) 80%, transparent);
+}
+
+.cm-editor .cm-selectionMatch {
+  background-color: color-mix(in srgb, var(--color-fn, var(--syn-fn)) 22%, transparent);
+}
+
+.cm-tooltip-autocomplete ul li[aria-selected] {
+  background: var(--color-primary) !important;
+  color: var(--color-primary-fg) !important;
+}
+
+.cm-diagnosticText {
+  font-family: var(--font-sans);
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
